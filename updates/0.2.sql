@@ -7,7 +7,7 @@ GRANT ALL PRIVILEGES ON wskz.* TO'dbuser1'@'localhost';
 CREATE TABLE `User` (
   `Id` varchar(13) NOT NULL,
   `Login` varchar(333) NOT NULL,
-  `Pass` varchar(333) NOT NULL,
+  `Password` varchar(333) NOT NULL,
   `Name` varchar(333) NOT NULL,
   `Surname` varchar(333) NOT NULL,
   `Gender` varchar(33) NOT NULL,

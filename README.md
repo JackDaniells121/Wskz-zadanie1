@@ -13,7 +13,8 @@ Widoki
 - login.php
 - register.php
 - index.php
-są w zasadzie widokami html z wcięciami echo php.
+
+to są w zasadzie widokami html z wcięciami echo php.
 
 ## SQL - Struktura tabel 
 ```sql

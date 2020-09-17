@@ -1,4 +1,6 @@
 ##
+    0.2.1 - klasy php
+##
     0.2.0 - struktury sql
 ## 
     0.1.2 - klasa database.php

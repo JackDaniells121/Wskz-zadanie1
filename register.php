@@ -23,7 +23,7 @@
 <body class="bg-gradient-primary">
 
   <div class="container">
-
+    
     <div class="card o-hidden border-0 shadow-lg my-5">
       <div class="card-body p-0">
         <!-- Nested Row within Card Body -->
@@ -32,45 +32,51 @@
           <div class="col-lg-7">
             <div class="p-5">
               <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                
+                <?php if(isset($_GET['error'])):?>
+                      <h4 class="h6 text-danger mb-4 mt-2">Taki login już istnieje !!!</h4>
+                <?php else:?>
+                      <h1 class="h4 text-gray-900 mb-4">Utwórz nowe konto</h1>
+                <?php endif;?>
               </div>
-              <form class="user">
+              <form class="user" action="php/User.php" method="POST">
+                <div class="form-group-row mb-2">
+                  <center>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="Gender" id="inlineRadio1" value="Mężczyzna" required>
+                      <label class="form-check-label" for="inlineRadio1">Mężczyzna</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="Gender" id="inlineRadio2" value="Kobieta">
+                      <label class="form-check-label" for="inlineRadio2">Kobieta</label>
+                    </div>
+                  </center>
+                </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="First Name">
+                    <input type="text" class="form-control form-control-user" name="Name" placeholder="Imie" required>
                   </div>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Last Name">
+                    <input type="text" class="form-control form-control-user" name="Surname" placeholder="Nazwisko" required>
                   </div>
                 </div>
+                
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email Address">
+                  <input type="email" class="form-control form-control-user" name="Login" placeholder="Email Address" required>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                    <input type="password" class="form-control form-control-user" name="Password" pattern=".{8,}"   required title="8 znaków minimum" placeholder="Hasło" >
                   </div>
                   <div class="col-sm-6">
-                    <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repeat Password">
+                    <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Powtórz hasło" required>
                   </div>
                 </div>
-                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                  Register Account
-                </a>
-                <!--<hr>
-                <a href="index.html" class="btn btn-google btn-user btn-block">
-                  <i class="fab fa-google fa-fw"></i> Register with Google
-                </a>
-                <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                  <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                </a>-->
+                <button type="Submit" name="registerNewUser" value="1" class="btn btn-primary btn-user btn-block">Zarejestruj</button>
               </form>
               <hr>
               <div class="text-center">
-                <a class="small" href="forgot-password.html">Forgot Password?</a>
-              </div>
-              <div class="text-center">
-                <a class="small" href="login.html">Already have an account? Login!</a>
+                <a class="small" href="login.php">Masz już konto? Zaloguj się!</a>
               </div>
             </div>
           </div>

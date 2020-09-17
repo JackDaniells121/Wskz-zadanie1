@@ -1,5 +1,5 @@
 <?php
-class database{
+class DB2{
     private $conn;  //connection
     private $servername = "localhost";
     private $username = "dbuser1";
@@ -7,10 +7,10 @@ class database{
     private $myDB   = "wskz";
 
     public function __construct(){
-        $this->connectDB();
+        $this->Connect();
     }
     
-    public function connectDB(){
+    public function Connect(){
         try {
             $this->conn = new PDO("mysql:host=$this->servername;dbname=$this->myDB", $this->username, $this->password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -19,18 +19,19 @@ class database{
             echo "Error: " . $e->getMessage();
         }
     }
-    public function dbGet($table_name,$where=null){
+    public function GetUser($table_name,$where=null){
         $sql="SELECT * FROM $table_name ";
         if($where)
             $sql.="WHERE $where";
     
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        $p = $stmt->fetchAll();
-        return($p);
+
+        $stmt->execute(); 
+        $result = $stmt->fetch();
+        
+        return($result);
     }
-    public function dbInsert($table_name, $values){
+    public function Insert($table_name, $values){
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $values['DateCreated']=date('Y-m-d');
         $values['Id']=uniqid();
@@ -48,8 +49,9 @@ class database{
             $ar[$key]=$v; 
         }
         $stmt->execute();
+        return true;
     }
-    public function dbUpdate($table_name, $id, $values){
+    public function Update($table_name, $id, $values){
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $values['DateModified']=date('Y-m-d');
         $vals='';
@@ -66,7 +68,7 @@ class database{
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
     }
-    public function dbDelete($table_name, $id){
+    public function Delete($table_name, $id){
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
         $sql = "DELETE FROM $table_name WHERE Id='";
@@ -79,4 +81,5 @@ class database{
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
     }
+
 }
